@@ -1,0 +1,16 @@
+# 本次构建的阶段：build package
+stages:
+  - build
+  - deploy
+# 构建 Job
+build:
+  stage: build
+  tags:
+    - maven
+  script:
+    - echo "=============== 开始编译构建任务 ==============="
+    - cnpm install
+    - cnpm run build
+    - docker build -t registry.cn-shenzhen.aliyuncs.com/phanpy/web .
+    - cd /home/upup
+    - docker-compose up -d
