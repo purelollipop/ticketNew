@@ -1,10 +1,5 @@
 <template>
-    <div sizingMethod="scale" class="main">
-        <div class="cover">
-            <div id="i1" ref="i1" style="width: 758px;height: 173px;overflow: hidden;position: absolute;top: 22%">
-                <img src="../assets/img/bg6.png">
-            </div>
-        </div>
+    <div class="main">
         <div class="singDiv">
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline class="form">
                 <h3 style="text-align: center">用户登录</h3>
@@ -30,8 +25,6 @@
         name: "sign_in",
         data(){
             return{
-                timer:"",
-                value2: 0,
                 id:'admin',
                 password:'',
                 formInline: {
@@ -70,7 +63,6 @@
 
                         this.$store.dispatch('addRouterMutation',true)
 
-                        window.clearInterval(this.timer);
                     }else{
                         this.$Message.error({
                             content:res.data.msg,
@@ -102,32 +94,10 @@
                     })
                 })
             },
-            handleSubmit(name) {
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                        this.$Message.success('Success!');
-                    } else {
-                        this.$Message.error('Fail!');
-                    }
-                })
-            },
-            move(){
-                let _this = this;
-                let a=-758;
-                _this.timer= setInterval(function () {
-                  if(a>=document.body.clientWidth){
-                      a=-758;
-                  }
-                  a+=1;
-                  _this.$refs.i1.style.marginLeft=a+"px";
-                },10);
-            },
         },
         created(){
-            console.log('sign')
         },
         mounted(){
-            this.move();
         },
     }
 </script>
@@ -146,12 +116,7 @@
         right: 0;
         bottom: 0;
     }
-    .cover{
-        height: 100%;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-    }
+
 .signClass
     width: 100%
     height: 100%
@@ -170,7 +135,7 @@
     display: flex;
     flex-direction: column;
     border-radius 5px;
-    background-image url("../assets/img/logo.png")
+    /*background-image url("../assets/img/logo.png")*/
     background-repeat no-repeat
     background-size:100% 100%;
     *
